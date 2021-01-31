@@ -143,8 +143,8 @@ const interatorCurry = callback => (array = []) => {
   }
 }
 
-interador([0], console.log)
-const instanceInterator = interadorCurry(console.log)
+interator([0], console.log)
+const instanceInterator = interatorCurry(console.log)
 
 state = ['0x1234', 'ok:key:1', '0', '3', '5']
 
