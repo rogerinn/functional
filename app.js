@@ -82,38 +82,35 @@ const result = ['error', '500']
 const numbers = [1,2,3]
 
 const patternMatch = (expect = [], result = []) => {
-    if(expect.length >= 1 && result.length >= 1 && expect.length === result.length){
-      const [hd, ...rest] = expect
-      const [hd1, ...rest1] = result
-      const isValid = match([hd, hd1] )
-      if(!isValid) {
-       return new Error('No match')
-      }
-      if(rest.length >= 1 && result.length >= 1){
-        return patternMatch(rest, rest1)
-      }
-    } else {
-      return new Error('No match')
-    } 
-}
-
-const returnMatch = (expect = [], result = []) => {
-  if(expect.length >= 1 && result.length >= 1 && expect.length === result.length){
+    if(expect.length < 1 || result.length < 1 || expect.length !== result.length){
+      return console.error(new Error('No match'))
+    }
     const [hd, ...rest] = expect
     const [hd1, ...rest1] = result
     const isValid = match([hd, hd1])
-    if(isValid) {
-      if(rest.length >= 1 && rest1.length >= 1){
-        returnMatch(rest,rest1, expect)
-      } else {
-        console.log(result);
-      }
-    } else {
-      return new Error('No match')
+    if(!isValid) {
+     return console.error(new Error('No match'))
     }
-  } else {
-    return new Error('No match')
-  } 
+    if(rest.length >= 1 && result.length >= 1 && expect.length === result.length){
+      return patternMatch(rest, rest1)
+    }
+}
+
+const returnMatch = (expect = [], result = []) => {
+    if(expect.length < 1 || result.length < 1 || expect.length !== result.length){
+      return console.error(new Error('No match'))
+    }
+    const [hd, ...rest] = expect
+    const [hd1, ...rest1] = result
+    const isValid = match([hd, hd1])
+    if(!isValid) {
+      return console.error(new Error('No match'))
+     }
+     if(rest.length >= 1 && result.length >= 1 && expect.length === result.length){
+       return patternMatch(rest, rest1)
+     } else {
+      console.log(result);
+    }
 }
 
 returnMatch(expect, expect)
@@ -143,12 +140,11 @@ const interatorCurry = callback => (array = []) => {
   }
 }
 
-interator([0], console.log)
+//interator([0], console.log)
 const instanceInterator = interatorCurry(console.log)
 
 state = ['0x1234', 'ok:key:1', '0', '3', '5']
 
-console.log(state.reverse())
-
+state.reverse()
 //Interator reverse
 
